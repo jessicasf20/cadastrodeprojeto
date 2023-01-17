@@ -12,7 +12,7 @@ public class Projeto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	private String maricula;
+	private String matricula;
 	private String curso;
 	private String email;
 	
@@ -33,12 +33,12 @@ public class Projeto {
 		this.nome = nome;
 	}
 
-	public String getMaricula() {
-		return maricula;
+	public String getMatricula() {
+		return matricula;
 	}
 
-	public void setMaricula(String maricula) {
-		this.maricula = maricula;
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
 	}
 
 	public String getCurso() {
@@ -57,4 +57,11 @@ public class Projeto {
 		this.email = email;
 	}
 
+	@Override
+	public String toString() {
+		return "Projeto [id=" + id + ", nome=" + nome + ", matricula=" + matricula + ", curso=" + curso + ", email="
+				+ email + "]";
+	}
+
+	
 }
