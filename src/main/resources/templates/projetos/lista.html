@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" 
+ href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<title>Insert title here</title>
+</head>
+<body>
+<div th:replace="~{menu :: menu}"></div>
+
+<div class="container">
+
+<h1>Lista de Projetos</h1>
+
+<table>
+
+<thead>
+
+<tr>
+<th>id</th>
+<th>Nome</th>
+<th>Matricula</th>
+<th>Curso</th>
+<th>Email</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr th:each="p : ${projetos}">
+<td th:text=${p.id}>1</td>
+<td th:text=${p.nome}>jessica</td>
+<td th:text=${p.matricula}>2019120</td>
+<td th:text=${p.curso}>info</td>
+<td th:text=${p.email}>jessica@gmail.com</td>
+</tr>
+
+
+</tbody>
+
+</table>
+
+</div>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
