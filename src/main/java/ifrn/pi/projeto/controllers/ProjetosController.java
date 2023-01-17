@@ -16,16 +16,16 @@ public class ProjetosController {
 	
 	@RequestMapping("/projeto/form")
 	public String form() {
-		return "formProjeto";
+		return "projetos/formProjeto";
 		
 	}
-	
+		
 		@PostMapping("/projeto")
 		public String adicionar(Projeto projeto) {
 			
 			System.out.println(projeto);
 			er.save(projeto);
-		return "projeto-adicionado";
+		return "projetos/projeto-adicionado";
 	}
 
 }
