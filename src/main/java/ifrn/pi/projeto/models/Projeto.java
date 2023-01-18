@@ -15,8 +15,17 @@ public class Projeto {
 	private String matricula;
 	private String curso;
 	private String email;
+	private String professor;
 	
 	
+	public String getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(String professor) {
+		this.professor = professor;
+	}
+
 	public Long getId() {
 		return id;
 	}
