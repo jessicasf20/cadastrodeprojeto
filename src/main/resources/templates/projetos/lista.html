@@ -31,7 +31,7 @@
 <tbody>
 <tr th:each="p : ${projetos}">
 <td th:text=${p.id}>1</td>
-<td th:text=${p.nome}>jessica</td>
+<td><a th:href="@{/projeto/{id}(id=${p.id})}"><span th:text=${p.nome}>jessica</span></a></td>
 <td th:text=${p.matricula}>2019120</td>
 <td th:text=${p.curso}>info</td>
 <td th:text=${p.email}>jessica@gmail.com</td>
