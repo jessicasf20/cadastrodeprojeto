@@ -88,4 +88,23 @@ public class ProjetosController {
 		
 		return "redirect:/projeto/{idProjeto}";
 	}
+	
+	@GetMapping("/{id}/remover")
+	public String apagarProjeto(@PathVariable Long id) {
+		
+		Optional<Projeto> opt = pr.findById(id);
+		
+		if(!opt.isEmpty()) {
+			Projeto projeto = opt.get();
+			
+			List<Docente> docentes = dr.findByProjeto(projeto);
+			
+			dr.deleteAll(docentes);
+			pr.delete(projeto);
+			
+		}
+		
+		return "redirect:/projeto";
+	}
+	
 }
