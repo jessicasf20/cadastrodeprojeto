@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ifrn.pi.projeto.models.Docente;
 import ifrn.pi.projeto.models.Projeto;
+import ifrn.pi.projeto.repositories.DocenteRepository;
 import ifrn.pi.projeto.repositories.ProjetoRepository;
 
 @Controller
@@ -19,7 +21,9 @@ import ifrn.pi.projeto.repositories.ProjetoRepository;
 public class ProjetosController {
 
 	@Autowired
-	private ProjetoRepository er;
+	private ProjetoRepository pr;
+	@Autowired
+	private DocenteRepository dr;
 
 	@GetMapping("/form")
 	public String form() {
@@ -31,13 +35,13 @@ public class ProjetosController {
 	public String adicionar(Projeto projeto) {
 
 		System.out.println(projeto);
-		er.save(projeto);
+		pr.save(projeto);
 		return "projetos/projeto-adicionado";
 	}
 
 	@GetMapping
 	public ModelAndView listar() {
-		List<Projeto> projetos = er.findAll();
+		List<Projeto> projetos = pr.findAll();
 		ModelAndView mv = new ModelAndView("projetos/lista");
 		mv.addObject("projetos", projetos);
 		return mv;
@@ -46,7 +50,7 @@ public class ProjetosController {
 	@GetMapping("/{id}")
 	public ModelAndView detalhar(@PathVariable Long id) {
 		ModelAndView md = new ModelAndView();
-		Optional<Projeto> opt = er.findById(id);
+		Optional<Projeto> opt = pr.findById(id);
 		
 		if (opt.isEmpty()) {
 			md.setViewName("redirect:/projeto");
@@ -57,7 +61,31 @@ public class ProjetosController {
 		Projeto projeto = opt.get();
 
 		md.addObject("projeto", projeto);
-
+		
+		List<Docente> docentes = dr.findByProjeto(projeto);
+		md.addObject("docentes", docentes);
+		
 		return md;
+	}
+	
+	@PostMapping("/{idProjeto}")
+	public String savarDocente(@PathVariable Long idProjeto, Docente docente) {
+		
+		
+		System.out.println("Id do projeto: " + idProjeto);
+		System.out.println(docente);
+		
+		Optional<Projeto> opt = pr.findById(idProjeto);
+		if(opt.isEmpty()) {
+			return "redirect:/projeto";
+			
+		}
+		
+		Projeto projeto = opt.get();
+		docente.setProjeto(projeto);
+		
+		dr.save(docente);
+		
+		return "redirect:/projeto/{idProjeto}";
 	}
 }
