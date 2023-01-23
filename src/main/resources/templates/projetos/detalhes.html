@@ -17,12 +17,13 @@
     <div class="col s12">
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
-          <span class="card-title">Projeto</span>
+          <span class="card-title"th:text= "${projeto.nome}">Projeto</span>
        	<p><strong>Id: </strong><span th:text= "${projeto.id}">1</span></p>   
-       	<p><strong>Nome: </strong><span th:text= "${projeto.nome}">projeto de projetos</span></p>   
+       	<p><strong>Responsavel: </strong><span th:text= "${projeto.responsavel}">responsavel</span></p>   
         <p><strong>Matricula: </strong><span th:text= "${projeto.matricula}">2019120</span></p>   
-        <p><strong>Curso: </strong><span th:text= "${projeto.curso}">Informatica</span></p>   
+        <p><strong>Categoria/Área: </strong><span th:text= "${projeto.categoria}">Informatica</span></p>   
         <p><strong>Email: </strong><span th:text= "${projeto.email}">jessica@gmail.com</span></p>   
+        <p><strong>Descrição: </strong><span th:text= "${projeto.descricao}">jessica@gmail.com</span></p>  
         </div>
           
         

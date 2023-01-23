@@ -21,8 +21,9 @@
 <th>id</th>
 <th>Nome</th>
 <th>Matricula</th>
-<th>Curso</th>
+<th>Categoria/Área</th>
 <th>Email</th>
+<th>Descrição</th>
 
 </tr>
 
@@ -33,8 +34,9 @@
 <td th:text=${p.id}>1</td>
 <td><a th:href="@{/projeto/{id}(id=${p.id})}"><span th:text=${p.nome}>jessica</span></a></td>
 <td th:text=${p.matricula}>2019120</td>
-<td th:text=${p.curso}>info</td>
+<td th:text=${p.categoria}>info</td>
 <td th:text=${p.email}>jessica@gmail.com</td>
+<td th:text=${p.descricao}>jessica@gmail.com</td>
 </tr>
 
 

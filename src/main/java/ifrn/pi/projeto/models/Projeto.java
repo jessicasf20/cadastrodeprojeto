@@ -7,16 +7,41 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Projeto {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private String matricula;
-	private String curso;
 	private String email;
-	
-	
+	private String responsavel;
+	private String categoria;
+	private String descricao;
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+
+	public String getResponsavel() {
+		return responsavel;
+	}
+
+	public void setResponsavel(String responsavel) {
+		this.responsavel = responsavel;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -41,14 +66,6 @@ public class Projeto {
 		this.matricula = matricula;
 	}
 
-	public String getCurso() {
-		return curso;
-	}
-
-	public void setCurso(String curso) {
-		this.curso = curso;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -59,9 +76,8 @@ public class Projeto {
 
 	@Override
 	public String toString() {
-		return "Projeto [id=" + id + ", nome=" + nome + ", matricula=" + matricula + ", curso=" + curso + ", email="
-				+ email + "]";
+		return "Projeto [id=" + id + ", nome=" + nome + ", matricula=" + matricula + ", categoria=" + categoria
+				+ ", email=" + email + ", responsavel=" + responsavel + ", descricao=" + descricao + "]";
 	}
 
-	
 }
