@@ -2,49 +2,55 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" 
- href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
-<div th:replace="~{menu :: menu}"></div>
+	<div th:replace="~{menu :: menu}"></div>
 
-<div class="container">
+	<div class="container">
 
-<h1>Lista de Projetos</h1>
+		<h1>Lista de Projetos</h1>
 
-<table class="highlight">
+		<table class="highlight">
 
-<thead>
+			<thead>
 
-<tr>
-<th>id</th>
-<th>Nome</th>
-<th>Matricula</th>
-<th>Categoria/Área</th>
-<th>Email</th>
-<th>Descrição</th>
+				<tr>
+					<th>id</th>
+					<th>Nome</th>
+					<th>Matricula</th>
+					<th>Categoria/Área</th>
+					<th>Email</th>
+					<th>Descrição</th>
+					<th></th>
 
-</tr>
+				</tr>
 
-</thead>
+			</thead>
 
-<tbody>
-<tr th:each="p : ${projetos}">
-<td th:text=${p.id}>1</td>
-<td><a th:href="@{/projeto/{id}(id=${p.id})}"><span th:text=${p.nome}>jessica</span></a></td>
-<td th:text=${p.matricula}>2019120</td>
-<td th:text=${p.categoria}>info</td>
-<td th:text=${p.email}>jessica@gmail.com</td>
-<td th:text=${p.descricao}>jessica@gmail.com</td>
-</tr>
+			<tbody>
+				<tr th:each="p : ${projetos}">
+					<td th:text=${p.id}>1</td>
+					<td><a th:href="@{/projeto/{id}(id=${p.id})}"><span
+							th:text=${p.nome}>jessica</span></a></td>
+					<td th:text=${p.matricula}>2019120</td>
+					<td th:text=${p.categoria}>info</td>
+					<td th:text=${p.email}>jessica@gmail.com</td>
+					<td th:text=${p.descricao}>jessica@gmail.com</td>
+					<td><a th:href="@{/projeto/{id}/remover(id=${p.id})}"> <i class="material-icons">delete</i></a></td>
+				</tr>
 
 
-</tbody>
+			</tbody>
 
-</table>
+		</table>
 
-</div>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	</div>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>

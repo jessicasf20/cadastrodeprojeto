@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" 
  href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
@@ -70,6 +72,7 @@
        		<th>Matricula:</th>
        		<th>Email:</th>
        		<th>Curso:</th>
+       		<th></th>
        		</tr>
        		</thead>
        		
@@ -80,6 +83,7 @@
        		<th th:text="${d.matricula}">201930</th>
        		<th th:text="${d.email}">fulano@gmail.com</th>
        		<th th:text="${d.curso}">Info</th>
+       		<th><a th:href="@{/projeto/{id}/apagar(id=${d.id})}"> <i class="material-icons">delete</i></a></th>
        		</tr>
        		</tbody>
        		
