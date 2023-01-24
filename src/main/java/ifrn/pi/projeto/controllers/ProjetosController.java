@@ -48,7 +48,7 @@ public class ProjetosController {
 	}
 
 	@GetMapping("/{id}")
-	public ModelAndView detalhar(@PathVariable Long id) {
+	public ModelAndView detalhar(@PathVariable Long id, Docente docente) {
 		ModelAndView md = new ModelAndView();
 		Optional<Projeto> opt = pr.findById(id);
 		
@@ -103,7 +103,7 @@ public class ProjetosController {
 		
 		return md;
 	}
-	@GetMapping("/{idProjeto}/docentes/idDocente/selecionar")
+	@GetMapping("/{idProjeto}/docentes/{idDocente}/selecionar")
 	public ModelAndView selecionarDocente(@PathVariable Long idProjeto, @PathVariable Long idDocente) {
 		ModelAndView md = new ModelAndView();
 		
@@ -126,6 +126,9 @@ public class ProjetosController {
 		
 		md.setViewName("projetos/detalhes");
 		md.addObject("docente", docente);
+		md.addObject("projeto", projeto);
+		md.addObject("docentes", dr.findByProjeto(projeto));
+		
 		
 		return md;
 	}
@@ -155,7 +158,6 @@ public class ProjetosController {
 		
 		if(!opt.isEmpty()) {
 			Docente docente = opt.get();
-			
 			dr.delete(docente);
 			
 		}

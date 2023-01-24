@@ -36,18 +36,21 @@
       <div class="card ">
         <div class="card-content ">
           <span class="card-title">Adicionar Docente</span>
-       		<form action="" method="post">
+       		<form th:action="@{/projeto/{idProjeto}(idProjeto=${projeto.id})}" method="post">
        		<div>
-       		<label>Nome:</label> <input type="text" name="nome">
+       		<input type="hidden" name="id" th:value="${docente.id}" readonly="readonly">
        		</div>
        		<div>
-       		<label>Matricula:</label> <input type="text" name="matricula">
+       		<label>Nome:</label> <input type="text" name="nome" th:value="${docente.nome}">
+       		</div>
+       		<div>
+       		<label>Matricula:</label> <input type="text" name="matricula" th:value="${docente.matricula}">
        		</div>
 			<div>
-       		<label>Email:</label> <input type="text" name="email">
+       		<label>Email:</label> <input type="text" name="email" th:value="${docente.email}">
        		</div>
        		<div>
-       		<label>Curso:</label> <input type="text" name="curso">
+       		<label>Curso:</label> <input type="text" name="curso" th:value="${docente.curso}">
        		</div>
        		<div>
        		<button type="submit" class="btn">Salvar</button>
@@ -78,15 +81,15 @@
        		
        		<tbody>
        		<tr th:each="d : ${docentes}">
-       		<th th:text="${d.id}">1</th>
-       		<th th:text="${d.nome}">Fulano</th>
-       		<th th:text="${d.matricula}">201930</th>
-       		<th th:text="${d.email}">fulano@gmail.com</th>
-       		<th th:text="${d.curso}">Info</th>
-       		<th>
-       		<a th:href="@{/projeto/{idProjeto}/docentes/idDocentes/selecionar(idProjeto=${projeto.id})}"><i class="material-icons">edit</i></a></a>
-      		<a th:href="@{/projeto/{id}/apagar(id=${d.id})}"> <i class="material-icons">delete</i></a>
-       		</th>t
+       		<td th:text="${d.id}">1</td>
+       		<td th:text="${d.nome}">Fulano</td>
+       		<td th:text="${d.matricula}">201930</td>
+       		<td th:text="${d.email}">fulano@gmail.com</td>
+       		<td th:text="${d.curso}">Info</td>
+       		<td>
+       		<a th:href="@{/projeto/{idProjeto}/docentes/{idDocente}/selecionar(idProjeto=${projeto.id}, idDocente=${d.id})}"> <i class="material-icons">edit</i></a>
+      		<a th:href="@{/projeto/{idProjeto}/docentes/{idDocente}/remover(idProjeto=${projeto.id}, idDocente=${d.id})}"> <i class="material-icons">delete</i></a>
+       		</td>
        		</tr>
        		</tbody>
        		
