@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Docente {
@@ -12,9 +13,14 @@ public class Docente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotBlank
 	private String nome;
+	@NotBlank
 	private String matricula;
+	@NotBlank
 	private String email;
+	@NotBlank
 	private String curso;
 
 	@ManyToOne

@@ -11,34 +11,40 @@
 <div class="container">
 <h1>Adicionar Projeto</h1>
 
-<form action= "/projeto" method="post">
+<form action= "/projeto" method="post" th:object="${projeto}">
 
 	<div>
-	 <input type="hidden" name="id" th:value="${projeto.id}" readonly="readonly">
+	 <input type="hidden" th:field="*{id}" readonly="readonly">
 	</div>
 	
 	<div>
-	<label>Nome do projeto:</label> <input type="text" name="nome" th:value="${projeto.nome}">
+	<label>Nome do projeto:</label> <input type="text" th:field="*{nome}">
+	<p th:errors="*{nome}"></p>
 	</div>
 	
 	<div>
-	<label>Responsavel:</label> <input type="text" name="responsavel" th:value="${projeto.responsavel}">
+	<label>Responsavel:</label> <input type="text" th:field="*{responsavel}">
+	<p th:errors="*{responsavel}"></p>
 	</div>
 	
 <div>
-<label>Matricula:</label> <input type="text" name="matricula" th:value="${projeto.matricula}">
+<label>Matricula:</label> <input type="text" th:field="*{matricula}">
+<p th:errors="*{matricula}"></p>
 </div>
 
 <div>
-<label>Categoria/Área:</label> <input type="text" name="categoria" th:value="${projeto.categoria}">
+<label>Categoria/Área:</label> <input type="text" th:field="*{categoria}">
+<p th:errors="*{categoria}"></p>
 </div>
 
 <div>
-<label>Email:</label> <input type="text" name="email" th:value="${projeto.email}">
+<label>Email:</label> <input type="text" th:field="*{email}">
+<p th:errors="*{email}"></p>
 </div>
 
 <div>
-<label>Descrição:</label> <input type="text" name="descricao" th:value="${projeto.descricao}">
+<label>Descrição:</label> <input type="text" th:field="*{descricao}">
+<p th:errors="*{descricao}"></p>
 </div>
 
 <div>

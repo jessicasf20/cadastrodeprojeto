@@ -38,19 +38,23 @@
           <span class="card-title">Adicionar Docente</span>
        		<form th:action="@{/projeto/{idProjeto}(idProjeto=${projeto.id})}" method="post">
        		<div>
-       		<input type="hidden" name="id" th:value="${docente.id}" readonly="readonly">
+       		<input type="hidden" th:field="*{docente.id}" readonly="readonly">
        		</div>
        		<div>
-       		<label>Nome:</label> <input type="text" name="nome" th:value="${docente.nome}">
+       		<label>Nome:</label> <input type="text" th:field="*{docente.nome}">
+       		<p th:errors="*{docente.nome}"></p>
        		</div>
        		<div>
-       		<label>Matricula:</label> <input type="text" name="matricula" th:value="${docente.matricula}">
+       		<label>Matricula:</label> <input type="text" th:field="*{docente.matricula}">
+       		<p th:errors="*{docente.matricula}"></p>
        		</div>
 			<div>
-       		<label>Email:</label> <input type="text" name="email" th:value="${docente.email}">
+       		<label>Email:</label> <input type="text" th:field="*{docente.email}">
+       		<p th:errors="*{docente.email}"></p>
        		</div>
        		<div>
-       		<label>Curso:</label> <input type="text" name="curso" th:value="${docente.curso}">
+       		<label>Curso:</label> <input type="text" th:field="*{docente.curso}">
+       		<p th:errors="*{docente.curso}"></p>
        		</div>
        		<div>
        		<button type="submit" class="btn">Salvar</button>
