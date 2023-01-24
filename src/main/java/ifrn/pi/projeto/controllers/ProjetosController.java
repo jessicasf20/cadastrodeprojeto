@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import ifrn.pi.projeto.models.Docente;
 import ifrn.pi.projeto.models.Projeto;
 import ifrn.pi.projeto.repositories.DocenteRepository;
 import ifrn.pi.projeto.repositories.ProjetoRepository;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/projeto")
@@ -32,8 +34,13 @@ public class ProjetosController {
 	}
 
 	@PostMapping
-	public String salvar(Projeto projeto) {
+	public String salvar(@Valid Projeto projeto, BindingResult result) {
 
+		if(result.hasErrors()) {
+			return form(projeto);
+			
+		}
+		
 		System.out.println(projeto);
 		pr.save(projeto);
 		return "redirect:/projeto";
@@ -69,7 +76,8 @@ public class ProjetosController {
 	}
 	
 	@PostMapping("/{idProjeto}")
-	public String savarDocente(@PathVariable Long idProjeto, Docente docente) {
+	public String savarDocente(@Valid @PathVariable Long idProjeto, Docente docente, BindingResult result) {
+		
 		
 		
 		System.out.println("Id do projeto: " + idProjeto);
