@@ -41,7 +41,10 @@
 					<td th:text=${p.categoria}>info</td>
 					<td th:text=${p.email}>jessica@gmail.com</td>
 					<td th:text=${p.descricao}>jessica@gmail.com</td>
-					<td><a th:href="@{/projeto/{id}/remover(id=${p.id})}"> <i class="material-icons">delete</i></a></td>
+					<td>
+					<a th:href="@{/projeto/{id}/selecionar(id=${p.id})}"><i class="material-icons">edit</i></a>
+					<a th:href="@{/projeto/{id}/remover(id=${p.id})}"> <i class="material-icons">delete</i></a>
+					</td>
 				</tr>
 
 

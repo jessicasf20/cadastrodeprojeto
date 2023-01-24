@@ -83,7 +83,10 @@
        		<th th:text="${d.matricula}">201930</th>
        		<th th:text="${d.email}">fulano@gmail.com</th>
        		<th th:text="${d.curso}">Info</th>
-       		<th><a th:href="@{/projeto/{id}/apagar(id=${d.id})}"> <i class="material-icons">delete</i></a></th>
+       		<th>
+       		<a th:href="@{/projeto/{idProjeto}/docentes/idDocentes/selecionar(idProjeto=${projeto.id})}"><i class="material-icons">delete</i></a></a>
+      		<a th:href="@{/projeto/{id}/apagar(id=${d.id})}"> <i class="material-icons">delete</i></a>
+       		</th>
        		</tr>
        		</tbody>
        		
