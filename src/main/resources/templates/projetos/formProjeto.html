@@ -14,27 +14,31 @@
 <form action= "/projeto" method="post">
 
 	<div>
-	<label>Nome do projeto:</label> <input type="text" name="nome">
+	 <input type="hidden" name="id" th:value="${projeto.id}" readonly="readonly">
 	</div>
 	
 	<div>
-	<label>Responsavel:</label> <input type="text" name="responsavel">
+	<label>Nome do projeto:</label> <input type="text" name="nome" th:value="${projeto.nome}">
+	</div>
+	
+	<div>
+	<label>Responsavel:</label> <input type="text" name="responsavel" th:value="${projeto.responsavel}">
 	</div>
 	
 <div>
-<label>Matricula:</label> <input type="text" name="matricula">
+<label>Matricula:</label> <input type="text" name="matricula" th:value="${projeto.matricula}">
 </div>
 
 <div>
-<label>Categoria/Área:</label> <input type="text" name="categoria">
+<label>Categoria/Área:</label> <input type="text" name="categoria" th:value="${projeto.categoria}">
 </div>
 
 <div>
-<label>Email:</label> <input type="text" name="email">
+<label>Email:</label> <input type="text" name="email" th:value="${projeto.email}">
 </div>
 
 <div>
-<label>Descrição:</label> <input type="text" name="descricao">
+<label>Descrição:</label> <input type="text" name="descricao" th:value="${projeto.descricao}">
 </div>
 
 <div>

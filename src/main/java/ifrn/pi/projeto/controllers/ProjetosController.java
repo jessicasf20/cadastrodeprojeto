@@ -26,17 +26,17 @@ public class ProjetosController {
 	private DocenteRepository dr;
 
 	@GetMapping("/form")
-	public String form() {
+	public String form(Projeto projeto) {
 		return "projetos/formProjeto";
 
 	}
 
 	@PostMapping
-	public String adicionar(Projeto projeto) {
+	public String salvar(Projeto projeto) {
 
 		System.out.println(projeto);
 		pr.save(projeto);
-		return "projetos/projeto-adicionado";
+		return "redirect:/projeto";
 	}
 
 	@GetMapping
@@ -89,6 +89,47 @@ public class ProjetosController {
 		return "redirect:/projeto/{idProjeto}";
 	}
 	
+	@GetMapping("/{id}/selecionar")
+	public ModelAndView selecionarProjeto(@PathVariable Long id) {
+		ModelAndView md = new ModelAndView();
+		Optional<Projeto> opt = pr.findById(id);
+		if(opt.isEmpty()) {
+			md.setViewName("redirect:/projeto");
+			return md;
+		}
+		Projeto projeto = opt.get();
+		md.setViewName("projetos/formProjeto");
+		md.addObject("projeto", projeto);
+		
+		return md;
+	}
+	@GetMapping("/{idProjeto}/docentes/idDocente/selecionar")
+	public ModelAndView selecionarDocente(@PathVariable Long idProjeto, @PathVariable Long idDocente) {
+		ModelAndView md = new ModelAndView();
+		
+		Optional<Projeto> optProjeto = pr.findById(idProjeto);
+		Optional<Docente> optDocente = dr.findById(idDocente);
+		
+		if(optProjeto.isEmpty() || optDocente.isEmpty()) {
+			md.setViewName("redirect:/projetos");
+			return md;
+		}
+		
+		Projeto projeto = optProjeto.get();
+		Docente docente = optDocente.get();
+		
+		if(projeto.getId() != docente.getProjeto().getId()) {
+			md.setViewName("redirect:/projetos");
+			return md;
+			
+		}
+		
+		md.setViewName("projetos/detalhes");
+		md.addObject("docente", docente);
+		
+		return md;
+	}
+	
 	@GetMapping("/{id}/remover")
 	public String apagarProjeto(@PathVariable Long id) {
 		
@@ -119,7 +160,7 @@ public class ProjetosController {
 			
 		}
 		
-		return "redirect:/projeto";
+		return "redirect:/projeto/{idProjeto}";
 	}
 	
 }
