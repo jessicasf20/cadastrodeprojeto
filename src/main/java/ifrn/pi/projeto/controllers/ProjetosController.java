@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ifrn.pi.projeto.models.Docente;
 import ifrn.pi.projeto.models.Projeto;
@@ -55,13 +56,15 @@ public class ProjetosController {
 	}
 
 	@GetMapping("/{id}")
-	public ModelAndView detalhar(@PathVariable Long id, Docente docente) {
+	public ModelAndView detalhar(@Valid @PathVariable Long id, Docente docente, BindingResult result) {
 		ModelAndView md = new ModelAndView();
 		Optional<Projeto> opt = pr.findById(id);
 		
+
+		
 		if (opt.isEmpty()) {
 			md.setViewName("redirect:/projeto");
-			return md;
+			return  md;
 		}
 
 		md.setViewName("projetos/detalhes");
@@ -142,7 +145,7 @@ public class ProjetosController {
 	}
 	
 	@GetMapping("/{id}/remover")
-	public String apagarProjeto(@PathVariable Long id) {
+	public String apagarProjeto(@PathVariable Long id, RedirectAttributes attributes) {
 		
 		Optional<Projeto> opt = pr.findById(id);
 		
@@ -153,6 +156,7 @@ public class ProjetosController {
 			
 			dr.deleteAll(docentes);
 			pr.delete(projeto);
+			attributes.addFlashAttribute("mensagem", "Projeto removido com sucesso!");
 			
 		}
 		
