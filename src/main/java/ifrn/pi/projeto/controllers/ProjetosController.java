@@ -6,12 +6,19 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+<<<<<<< HEAD
+=======
 
+>>>>>>> 05727bcdde29a2564e0f086869de4b25db94f688
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+<<<<<<< HEAD
+=======
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+>>>>>>> b1ac0257aaa2dcb1603b0bb233d70511ab1c9994
 
 import ifrn.pi.projeto.models.Docente;
 import ifrn.pi.projeto.models.Projeto;
@@ -35,7 +42,7 @@ public class ProjetosController {
 	}
 
 	@PostMapping
-	public String salvar(@Valid Projeto projeto, BindingResult result) {
+	public String salvar(@Valid Projeto projeto, BindingResult result, RedirectAttributes attributes ) {
 
 		if (result.hasErrors()) {
 			return form(projeto);
@@ -44,6 +51,7 @@ public class ProjetosController {
 
 		System.out.println(projeto);
 		pr.save(projeto);
+		attributes.addFlashAttribute("mensagem", "Projeto adicionado com sucesso!");
 		return "redirect:/projeto";
 	}
 
@@ -77,7 +85,7 @@ public class ProjetosController {
 	}
 
 	@PostMapping("/{idProjeto}")
-	public ModelAndView savarDocente(@PathVariable Long idProjeto, @Valid Docente docente, BindingResult result) {
+	public ModelAndView savarDocente(@PathVariable Long idProjeto, @Valid Docente docente, BindingResult result, RedirectAttributes attributes) {
 		ModelAndView md = new ModelAndView();
 
 		if (result.hasErrors()) {
@@ -100,6 +108,7 @@ public class ProjetosController {
 		docente.setProjeto(projeto);
 
 		dr.save(docente);
+		attributes.addFlashAttribute("mensagem", "Docente adicionado com sucesso!");
 		md.setViewName("redirect:/projeto/{idProjeto}");
 
 		return md;
@@ -150,8 +159,13 @@ public class ProjetosController {
 	}
 
 	@GetMapping("/{id}/remover")
+<<<<<<< HEAD
 	public String apagarProjeto(@PathVariable Long id) {
 
+=======
+	public String apagarProjeto(@PathVariable Long id, RedirectAttributes attributes) {
+		
+>>>>>>> b1ac0257aaa2dcb1603b0bb233d70511ab1c9994
 		Optional<Projeto> opt = pr.findById(id);
 
 		if (!opt.isEmpty()) {
@@ -161,21 +175,35 @@ public class ProjetosController {
 
 			dr.deleteAll(docentes);
 			pr.delete(projeto);
+<<<<<<< HEAD
 
+=======
+			attributes.addFlashAttribute("mensagem", "Projeto removido com sucesso!");
+>>>>>>> b1ac0257aaa2dcb1603b0bb233d70511ab1c9994
 		}
 
 		return "redirect:/projeto";
 	}
 
 	@GetMapping("/{idProjeto}/docentes/{idDocente}/remover")
+<<<<<<< HEAD
 	public String apagarProjeto(@PathVariable Long idProjeto, @PathVariable Long idDocente) {
 
+=======
+	public String apagarProjeto(@PathVariable Long idProjeto, @PathVariable Long idDocente, RedirectAttributes attributes) {
+		
+>>>>>>> b1ac0257aaa2dcb1603b0bb233d70511ab1c9994
 		Optional<Docente> opt = dr.findById(idDocente);
 
 		if (!opt.isEmpty()) {
 			Docente docente = opt.get();
 			dr.delete(docente);
+<<<<<<< HEAD
 
+=======
+			attributes.addFlashAttribute("mensagem", "Docente removido com sucesso!");
+			
+>>>>>>> b1ac0257aaa2dcb1603b0bb233d70511ab1c9994
 		}
 
 		return "redirect:/projeto/{idProjeto}";
