@@ -35,7 +35,7 @@ public class ProjetosController {
 	}
 
 	@PostMapping
-	public String salvar(@Valid Projeto projeto, BindingResult result) {
+	public String salvar(@Valid Projeto projeto, BindingResult result, RedirectAttributes attributes) {
 
 		if(result.hasErrors()) {
 			return form(projeto);
@@ -44,6 +44,8 @@ public class ProjetosController {
 		
 		System.out.println(projeto);
 		pr.save(projeto);
+		attributes.addFlashAttribute("mensagem", "Projeto salvo com sucesso!");
+		
 		return "redirect:/projeto";
 	}
 
@@ -79,7 +81,7 @@ public class ProjetosController {
 	}
 	
 	@PostMapping("/{idProjeto}")
-	public String savarDocente(@Valid @PathVariable Long idProjeto, Docente docente, BindingResult result) {
+	public String savarDocente(@Valid @PathVariable Long idProjeto, Docente docente, BindingResult result, RedirectAttributes attributes) {
 		
 		
 		
@@ -96,6 +98,7 @@ public class ProjetosController {
 		docente.setProjeto(projeto);
 		
 		dr.save(docente);
+		attributes.addFlashAttribute("mensagem", "Docente adicionado com sucesso!");
 		
 		return "redirect:/projeto/{idProjeto}";
 	}
@@ -164,13 +167,14 @@ public class ProjetosController {
 	}
 	
 	@GetMapping("/{idProjeto}/docentes/{idDocente}/remover")
-	public String apagarProjeto(@PathVariable Long idProjeto, @PathVariable Long idDocente) {
+	public String apagarProjeto(@PathVariable Long idProjeto, @PathVariable Long idDocente, RedirectAttributes attributes) {
 		
 		Optional<Docente> opt = dr.findById(idDocente);
 		
 		if(!opt.isEmpty()) {
 			Docente docente = opt.get();
 			dr.delete(docente);
+			attributes.addFlashAttribute("mensagem", "Docente removido com sucesso!");
 			
 		}
 		
