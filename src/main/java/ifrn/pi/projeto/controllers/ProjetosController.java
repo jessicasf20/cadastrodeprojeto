@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import ifrn.pi.projeto.models.Docente;
 import ifrn.pi.projeto.models.Projeto;
@@ -76,16 +77,22 @@ public class ProjetosController {
 	}
 	
 	@PostMapping("/{idProjeto}")
-	public String savarDocente(@Valid @PathVariable Long idProjeto, Docente docente, BindingResult result) {
+	public ModelAndView savarDocente(@Valid @PathVariable Long idProjeto, Docente docente, BindingResult result) {
+		ModelAndView md = new ModelAndView();
 		
-		
+		if(result.hasErrors()) {
+			
+			return md;
+		}
 		
 		System.out.println("Id do projeto: " + idProjeto);
 		System.out.println(docente);
 		
 		Optional<Projeto> opt = pr.findById(idProjeto);
 		if(opt.isEmpty()) {
-			return "redirect:/projeto";
+			md.setViewName("redirect:/projeto");
+			
+			return md;
 			
 		}
 		
@@ -93,8 +100,9 @@ public class ProjetosController {
 		docente.setProjeto(projeto);
 		
 		dr.save(docente);
+		md.setViewName("redirect:/projeto/{idProjeto}");
 		
-		return "redirect:/projeto/{idProjeto}";
+		return md;
 	}
 	
 	@GetMapping("/{id}/selecionar")

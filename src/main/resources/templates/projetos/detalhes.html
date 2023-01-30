@@ -2,108 +2,132 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" 
- href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
- <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
-<div th:replace="~{menu :: menu}"></div>
+	<div th:replace="~{menu :: menu}"></div>
 
-<div class="container">
-	
-	<h1>Detalhes do Projeto</h1>
-	
-	<div class="row">
-    <div class="col s12">
-      <div class="card ">
-        <div class="card-content ">
-          <span class="card-title"th:text= "${projeto.nome}">Projeto</span>
-       	<p><strong>Id: </strong><span th:text= "${projeto.id}">1</span></p>   
-       	<p><strong>Responsavel: </strong><span th:text= "${projeto.responsavel}">responsavel</span></p>   
-        <p><strong>Matricula: </strong><span th:text= "${projeto.matricula}">2019120</span></p>   
-        <p><strong>Categoria/Área: </strong><span th:text= "${projeto.categoria}">Informatica</span></p>   
-        <p><strong>Email: </strong><span th:text= "${projeto.email}">jessica@gmail.com</span></p>   
-        <p><strong>Descrição: </strong><span th:text= "${projeto.descricao}">jessica@gmail.com</span></p>  
-        </div>
-       </div>
-     </div>
-  </div>
-  
-  <div class="row">
-    <div class="col s12">
-      <div class="card ">
-        <div class="card-content ">
-          <span class="card-title">Adicionar Docente</span>
-       		<form th:action="@{/projeto/{idProjeto}(idProjeto=${projeto.id})}" method="post">
-       		<div>
-       		<input type="hidden" th:field="*{docente.id}" readonly="readonly">
-       		</div>
-       		<div>
-       		<label>Nome:</label> <input type="text" th:field="*{docente.nome}">
-       		<p th:errors="*{docente.nome}"></p>
-       		</div>
-       		<div>
-       		<label>Matricula:</label> <input type="text" th:field="*{docente.matricula}">
-       		<p th:errors="*{docente.matricula}"></p>
-       		</div>
-			<div>
-       		<label>Email:</label> <input type="text" th:field="*{docente.email}">
-       		<p th:errors="*{docente.email}"></p>
-       		</div>
-       		<div>
-       		<label>Curso:</label> <input type="text" th:field="*{docente.curso}">
-       		<p th:errors="*{docente.curso}"></p>
-       		</div>
-       		<div>
-       		<button type="submit" class="btn">Salvar</button>
-       		<button type="reset" class="btn">Apagar</button>
-       		</div>
-       		</form>
-        </div>
-       </div>
-     </div>
-  </div>
-  
-  <div class="row">
-    <div class="col s12">
-      <div class="card ">
-        <div class="card-content ">
-          <span class="card-title">Docentes</span>
-       		<table class="highlight">
-       		<thead>
-       		<tr>
-       		<th>Id:</th>
-       		<th>Nome:</th>
-       		<th>Matricula:</th>
-       		<th>Email:</th>
-       		<th>Curso:</th>
-       		<th></th>
-       		</tr>
-       		</thead>
-       		
-       		<tbody>
-       		<tr th:each="d : ${docentes}">
-       		<td th:text="${d.id}">1</td>
-       		<td th:text="${d.nome}">Fulano</td>
-       		<td th:text="${d.matricula}">201930</td>
-       		<td th:text="${d.email}">fulano@gmail.com</td>
-       		<td th:text="${d.curso}">Info</td>
-       		<td>
-       		<a th:href="@{/projeto/{idProjeto}/docentes/{idDocente}/selecionar(idProjeto=${projeto.id}, idDocente=${d.id})}"> <i class="material-icons">edit</i></a>
-      		<a th:href="@{/projeto/{idProjeto}/docentes/{idDocente}/remover(idProjeto=${projeto.id}, idDocente=${d.id})}"> <i class="material-icons">delete</i></a>
-       		</td>
-       		</tr>
-       		</tbody>
-       		
-       		</table>
-        </div>
-       </div>
-     </div>
-  </div>
+	<div class="container">
 
-</div>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+		<h1>Detalhes do Projeto</h1>
+
+		<div class="row">
+			<div class="col s12">
+				<div class="card ">
+					<div class="card-content ">
+						<span class="card-title" th:text="${projeto.nome}">Projeto</span>
+						<p>
+							<strong>Id: </strong><span th:text="${projeto.id}">1</span>
+						</p>
+						<p>
+							<strong>Responsavel: </strong><span
+								th:text="${projeto.responsavel}">responsavel</span>
+						</p>
+						<p>
+							<strong>Matricula: </strong><span th:text="${projeto.matricula}">2019120</span>
+						</p>
+						<p>
+							<strong>Categoria/Área: </strong><span
+								th:text="${projeto.categoria}">Informatica</span>
+						</p>
+						<p>
+							<strong>Email: </strong><span th:text="${projeto.email}">jessica@gmail.com</span>
+						</p>
+						<p>
+							<strong>Descrição: </strong><span th:text="${projeto.descricao}">jessica@gmail.com</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col s12">
+				<div class="card ">
+					<div class="card-content ">
+						<span class="card-title">Adicionar Docente</span>
+						<form th:action="@{/projeto/{idProjeto}(idProjeto=${projeto.id})}" th:object="${docente}"
+							method="post">
+							<div>
+								<input type="hidden" th:field="*{id}"
+									readonly="readonly">
+							</div>
+							<div>
+								<label>Nome:</label> <input type="text"
+									th:field="*{nome}">
+								<p th:errors="*{nome}"></p>
+							</div>
+							<div>
+								<label>Matricula:</label> <input type="text"
+									th:field="*{matricula}">
+								<p th:errors="*{matricula}"></p>
+							</div>
+							<div>
+								<label>Email:</label> <input type="text"
+									th:field="*{email}">
+								<p th:errors="*{email}"></p>
+							</div>
+							<div>
+								<label>Curso:</label> <input type="text"
+									th:field="*{curso}">
+								<p th:errors="*{curso}"></p>
+							</div>
+							<div>
+								<button type="submit" class="btn">Salvar</button>
+								<button type="reset" class="btn">Apagar</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col s12">
+				<div class="card ">
+					<div class="card-content ">
+						<span class="card-title">Docentes</span>
+						<table class="highlight">
+							<thead>
+								<tr>
+									<th>Id:</th>
+									<th>Nome:</th>
+									<th>Matricula:</th>
+									<th>Email:</th>
+									<th>Curso:</th>
+									<th></th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr th:each="d : ${docentes}">
+									<td th:text="${d.id}">1</td>
+									<td th:text="${d.nome}">Fulano</td>
+									<td th:text="${d.matricula}">201930</td>
+									<td th:text="${d.email}">fulano@gmail.com</td>
+									<td th:text="${d.curso}">Info</td>
+									<td><a
+										th:href="@{/projeto/{idProjeto}/docentes/{idDocente}/selecionar(idProjeto=${projeto.id}, idDocente=${d.id})}">
+											<i class="material-icons">edit</i>
+									</a> <a
+										th:href="@{/projeto/{idProjeto}/docentes/{idDocente}/remover(idProjeto=${projeto.id}, idDocente=${d.id})}">
+											<i class="material-icons">delete</i>
+									</a></td>
+								</tr>
+							</tbody>
+
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
