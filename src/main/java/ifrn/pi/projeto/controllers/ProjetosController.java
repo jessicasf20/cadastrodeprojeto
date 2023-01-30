@@ -44,8 +44,7 @@ public class ProjetosController {
 		
 		System.out.println(projeto);
 		pr.save(projeto);
-		attributes.addFlashAttribute("mensagem", "Projeto salvo com sucesso!");
-		
+		attributes.addFlashAttribute("mensagem", "Projeto adicionado com sucesso!");
 		return "redirect:/projeto";
 	}
 
@@ -58,15 +57,13 @@ public class ProjetosController {
 	}
 
 	@GetMapping("/{id}")
-	public ModelAndView detalhar(@Valid @PathVariable Long id, Docente docente, BindingResult result) {
+	public ModelAndView detalhar(@PathVariable Long id, Docente docente) {
 		ModelAndView md = new ModelAndView();
 		Optional<Projeto> opt = pr.findById(id);
 		
-
-		
 		if (opt.isEmpty()) {
 			md.setViewName("redirect:/projeto");
-			return  md;
+			return md;
 		}
 
 		md.setViewName("projetos/detalhes");
@@ -81,16 +78,22 @@ public class ProjetosController {
 	}
 	
 	@PostMapping("/{idProjeto}")
-	public String savarDocente(@Valid @PathVariable Long idProjeto, Docente docente, BindingResult result, RedirectAttributes attributes) {
+	public ModelAndView savarDocente(@PathVariable Long idProjeto, @Valid Docente docente, BindingResult result, RedirectAttributes attributes) {
+		ModelAndView md = new ModelAndView();
 		
-		
+		if(result.hasErrors()) {
+			
+			return detalhar(idProjeto, docente);
+		}
 		
 		System.out.println("Id do projeto: " + idProjeto);
 		System.out.println(docente);
 		
 		Optional<Projeto> opt = pr.findById(idProjeto);
 		if(opt.isEmpty()) {
-			return "redirect:/projeto";
+			md.setViewName("redirect:/projeto");
+			
+			return md;
 			
 		}
 		
@@ -99,8 +102,9 @@ public class ProjetosController {
 		
 		dr.save(docente);
 		attributes.addFlashAttribute("mensagem", "Docente adicionado com sucesso!");
+		md.setViewName("redirect:/projeto/{idProjeto}");
 		
-		return "redirect:/projeto/{idProjeto}";
+		return md;
 	}
 	
 	@GetMapping("/{id}/selecionar")
