@@ -56,7 +56,7 @@ public class ProjetosController {
 	}
 
 	@GetMapping("/{id}")
-	public ModelAndView detalhar(@PathVariable Long id, @Valid Docente docente) {
+	public ModelAndView detalhar(@PathVariable Long id, Docente docente) {
 		ModelAndView md = new ModelAndView();
 		Optional<Projeto> opt = pr.findById(id);
 		
