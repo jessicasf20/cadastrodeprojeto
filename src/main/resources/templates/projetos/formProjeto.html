@@ -11,7 +11,7 @@
 <div class="container">
 <h1>Adicionar Projeto</h1>
 
-<form action= "/projeto" method="post" th:object="${projeto}">
+<form th:action="@{/projeto}" method="post" th:object="${projeto}">
 
 	<div>
 	 <input type="hidden" th:field="*{id}" readonly="readonly">
