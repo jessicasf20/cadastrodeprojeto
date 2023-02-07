@@ -39,6 +39,6 @@ public class LoginController {
 		System.out.println(usuario);
 		ur.save(usuario);
 		
-		return "login";
+		return "usuario";
 	}
 }

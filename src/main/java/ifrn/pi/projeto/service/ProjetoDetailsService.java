@@ -1,28 +1,29 @@
 package ifrn.pi.projeto.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import ifrn.pi.projeto.models.Usuario;
 import ifrn.pi.projeto.repositories.UsuarioRepository;
 
-@Component
+@Service
 public class ProjetoDetailsService implements UserDetailsService {
 
-	@Autowired
-	private UsuarioRepository usuarioRepository;
+	final UsuarioRepository usuarioRepository;
+	
+	public ProjetoDetailsService (UsuarioRepository usuarioRepository) {
+		this.usuarioRepository = usuarioRepository;
+	}
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuario usuario = usuarioRepository.findByUsername(username);
+		Usuario usuario = usuarioRepository.findByUsername(username)
+				.orElseThrow(() -> new UsernameNotFoundException(username));
 		
-		if(usuario == null) {
-			throw new UsernameNotFoundException("Usuário não encontrado");
-		}
-		return usuario;
+				return usuario;
 	}
 	
 }

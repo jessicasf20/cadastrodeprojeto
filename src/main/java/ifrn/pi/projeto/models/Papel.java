@@ -8,7 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Admin implements GrantedAuthority {
+public class Papel implements GrantedAuthority {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
