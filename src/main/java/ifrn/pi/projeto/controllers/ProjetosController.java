@@ -201,8 +201,5 @@ public class ProjetosController {
 
 		return "redirect:/projeto/{idProjeto}";
 	}
-	
-	
-	
 
 }

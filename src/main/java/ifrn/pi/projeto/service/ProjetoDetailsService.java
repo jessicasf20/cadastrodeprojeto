@@ -12,18 +12,18 @@ import ifrn.pi.projeto.repositories.UsuarioRepository;
 @Service
 public class ProjetoDetailsService implements UserDetailsService {
 
-	final UsuarioRepository usuarioRepository;
-	
-	public ProjetoDetailsService (UsuarioRepository usuarioRepository) {
-		this.usuarioRepository = usuarioRepository;
-	}
-	
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuario usuario = usuarioRepository.findByUsername(username)
-				.orElseThrow(() -> new UsernameNotFoundException(username));
-		
-				return usuario;
-	}
-	
+final UsuarioRepository usuarioRepository;
+
+public ProjetoDetailsService (UsuarioRepository usuarioRepository) {
+this.usuarioRepository = usuarioRepository;
+}
+
+@Override
+public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+Usuario usuario = usuarioRepository.findByUsername(username)
+.orElseThrow(() -> new UsernameNotFoundException(username));
+
+return new usuario(usuario.getUsername(), usuario.getPassword(), enabled: true, accountNonExoired: true, credentialsNonExpired: true, usuario.getAuthorities());
+}
+
 }
