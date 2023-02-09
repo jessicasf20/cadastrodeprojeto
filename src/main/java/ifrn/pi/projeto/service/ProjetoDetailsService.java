@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import ifrn.pi.projeto.models.Usuario;
 import ifrn.pi.projeto.repositories.UsuarioRepository;
+import jakarta.transaction.Transactional;
 
 @Service
+@Transactional
 public class ProjetoDetailsService implements UserDetailsService {
 
 final UsuarioRepository usuarioRepository;
