@@ -3,7 +3,7 @@ package ifrn.pi.projeto.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+ 
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,9 +27,6 @@ public class ProjetoSecurityConfig {
 				.httpBasic()
 				.and()
 				.authorizeHttpRequests()
-				.requestMatchers(HttpMethod.GET, "/projeto/**").permitAll()
-				.requestMatchers(HttpMethod.POST, "/projeto").hasRole("USER")
-				.requestMatchers(HttpMethod.DELETE, "/projeto/**").hasRole("ADMIN")
 				.anyRequest().authenticated()
 				.and().formLogin().loginPage("/login").permitAll()
 				.and()
